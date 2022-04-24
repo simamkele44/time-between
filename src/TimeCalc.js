@@ -142,20 +142,20 @@ const timePassed = (firstDateTime, secondDateTime) => {
                 return (`1 week ago`)
             }else if(elapsed_days<21){
                 return (`2 weeks ago`)
-            }else if(elapsed_days<28){
+            }else if(elapsed_days<29){
                 return (`3 weeks ago`)
             }else{
                 return (`4 weeks ago`)
             }
         }else{
             if(Math.abs(elapsed_days<14)){
-                return (`Happenning in 1 week`)
+                return (`Happening in 1 week`)
             }else if(Math.abs(elapsed_days<21)){
-                return (`Happenning in 2 weeks`)
+                return (`Happening in 2 weeks`)
             }else if(Math.abs(elapsed_days<28)){
-                return (`Happenning in 3 weeks`)
+                return (`Happening in 3 weeks`)
             }else{
-                return (`Happenning in 4 weeks`)
+                return (`Happening in 4 weeks`)
             }
         }
         

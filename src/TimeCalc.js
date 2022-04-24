@@ -24,7 +24,7 @@ const currentDateTimeValues = {
 
 
 /* FIRST DATE TIME */
-const firstDateTime = (dateone) => {
+export const firstDateTime = (dateone) => {
     const firstdate = new Date(dateone);
     return {
         dateone: firstdate,
@@ -40,7 +40,7 @@ const firstDateTime = (dateone) => {
 
 
 /* SECOND DATE TIME */
-const secondDateTime = (askdate) => {
+export const secondDateTime = (askdate) => {
     const now = new Date(askdate);
     return {
         askdate: now,

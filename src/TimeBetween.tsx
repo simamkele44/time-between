@@ -1,5 +1,5 @@
 import React from 'react';
-import {timeBetweenDates} from './TimeCalc';
+import {timeBetweenDates, firstDateTime, secondDateTime} from './TimeCalc';
 
 interface TimeBetweenProps {
     firstdate: string;
@@ -10,7 +10,7 @@ interface TimeBetweenProps {
 export const TimeBetween: React.FC<TimeBetweenProps> = ({firstdate, seconddate}) => {
 
     const Calc = (firstdate: string, seconddate: string) => {
-        return timeBetweenDates(new Date(firstdate), new Date(seconddate));
+        return timeBetweenDates(firstDateTime(new Date(firstdate)), secondDateTime(new Date(seconddate)));
     }
 
     return (

@@ -10,7 +10,7 @@ interface TimeBetweenProps {
 export const TimeBetween: React.FC<TimeBetweenProps> = ({firstdate, seconddate}) => {
 
     const Calc = (firstdate: string, seconddate: string) => {
-        return timeBetweenDates(firstdate, seconddate);
+        return timeBetweenDates(new Date(firstdate), new Date(seconddate));
     }
 
     return (

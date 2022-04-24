@@ -1,16 +1,19 @@
+/* 
 
-// Random DateTime
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
+Language: JavaScript
+Author: Sima nongwe
+Project: Time-Between Calculator 
 
-// The current date time
-const currentDateTime = {
+*/
+
+
+/* CURRENT DATE TIME */
+
+const currentDateTime = {   
     now: new Date(),
 }
 
-// Current Date Time Values
-const nowDateTime = {
+const currentDateTimeValues = {       
     sec: currentDateTime.now.getSeconds(),
     min: currentDateTime.now.getMinutes(),
     hour: currentDateTime.now.getHours(),
@@ -19,8 +22,25 @@ const nowDateTime = {
     year: currentDateTime.now.getFullYear()
 }
 
-// The past DateTime
-const receivedDateTime = (askdate) => {
+
+/* FIRST DATE TIME */
+const firstDateTime = (dateone) => {
+    const firstdate = new Date(dateone);
+    return {
+        dateone: firstdate,
+        sec: firstdate.getSeconds(),
+        min: firstdate.getMinutes(),
+        hour: firstdate.getHours(),
+        day: firstdate.getDate(),
+        month: firstdate.getMonth()+1,
+        year: firstdate.getFullYear()
+    }
+}
+
+
+
+/* SECOND DATE TIME */
+const secondDateTime = (askdate) => {
     const now = new Date(askdate);
     return {
         askdate: now,
@@ -33,49 +53,56 @@ const receivedDateTime = (askdate) => {
     }
 }
 
-const timePassed = (currentDateTime, receivedDateTime) => {
+
+/* CALCULATING DATE TIME */
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
+const timePassed = (firstDateTime, secondDateTime) => {
 
     // Current Date Time
-    const current_year = currentDateTime.year;
-    const current_month = currentDateTime.month;
-    const current_day = currentDateTime.day;
-    const current_hour = currentDateTime.hour;
-    const current_min = currentDateTime.min;
-    const current_sec = currentDateTime.sec;
+    const first_year = firstDateTime.year;
+    const first_month = firstDateTime.month;
+    const first_day = firstDateTime.day;
+    const first_hour = firstDateTime.hour;
+    const first_min = firstDateTime.min;
+    const first_sec = firstDateTime.sec;
 
     // Received Date Time
-    const received_year = receivedDateTime.year;
-    const received_month = receivedDateTime.month;
-    const received_day = receivedDateTime.day;
-    const received_hour = receivedDateTime.hour;
-    const received_min = receivedDateTime.min;
-    const received_sec = receivedDateTime.sec;
+    const second_year = secondDateTime.year;
+    const second_month = secondDateTime.month;
+    const second_day = secondDateTime.day;
+    const second_hour = secondDateTime.hour;
+    const second_min = secondDateTime.min;
+    const second_sec = secondDateTime.sec;
 
 
     // Check Equal Values
 
-    const same_year = current_year==received_year;
-    const same_month = current_month==received_month;
-    const same_day = current_day==received_day;
-    const same_hour = current_hour==received_hour;
-    const same_min = current_min==received_min;
-    const same_sec = current_sec==received_sec;
+    const same_year = first_year==second_year;
+    const same_month = first_month==second_month;
+    const same_day = first_day==second_day;
+    const same_hour = first_hour==second_hour;
+    const same_min = first_min==second_min;
+    const same_sec = first_sec==second_sec;
 
     // Check the time differences
     const in_secs = (same_year && same_month && same_day && same_hour && same_min);
-    const in_mins = (current_year==received_year && same_month && same_day && same_hour);
-    const in_hours = (current_year==received_year && same_month && same_day);
-    const in_day = (current_year==received_year && same_month);
-    const in_months = (current_year==received_year);
+    const in_mins = (same_year && same_month && same_day && same_hour);
+    const in_hours = (same_year && same_month && same_day);
+    const in_week = (same_year && same_month && (Math.abs(first_day - second_day)>=7 && Math.abs(first_day - second_day)<=28));
+    const in_day = (same_year && same_month);
+    const in_months = (same_year);
 
 
-    // Time Difference Between Dates
-    const elapsed_secs = current_sec-received_sec
-    const elapsed_mins = current_min-received_min
-    const elapsed_hours = current_hour-received_hour
-    const elapsed_days = current_day-received_day
-    const elapsed_months = current_month-received_month
-    const elapsed_years = current_year-received_year
+    // Time Difference Between Dates, to determine if datetime is in past or future
+    const elapsed_secs = first_sec-second_sec
+    const elapsed_mins = first_min-second_min
+    const elapsed_hours = first_hour-second_hour
+    const elapsed_days = first_day-second_day
+    const elapsed_months = first_month-second_month
+    const elapsed_years = first_year-second_year
 
 
 
@@ -108,6 +135,32 @@ const timePassed = (currentDateTime, receivedDateTime) => {
         
     }
 
+    // Weeks
+    if(in_week) {
+        if(!(elapsed_days<0)){
+            if(elapsed_days<14){
+                return (`1 week ago`)
+            }else if(elapsed_days<21){
+                return (`2 weeks ago`)
+            }else if(elapsed_days<28){
+                return (`3 weeks ago`)
+            }else{
+                return (`4 weeks ago`)
+            }
+        }else{
+            if(Math.abs(elapsed_days<14)){
+                return (`Happenning in 1 week`)
+            }else if(Math.abs(elapsed_days<21)){
+                return (`Happenning in 2 weeks`)
+            }else if(Math.abs(elapsed_days<28)){
+                return (`Happenning in 3 weeks`)
+            }else{
+                return (`Happenning in 4 weeks`)
+            }
+        }
+        
+    }
+
     // Day
     if(in_day) {
         if(!(elapsed_days<0)){
@@ -117,6 +170,7 @@ const timePassed = (currentDateTime, receivedDateTime) => {
         }
         
     }
+
 
     // Months
     if(in_months) {
@@ -136,11 +190,6 @@ const timePassed = (currentDateTime, receivedDateTime) => {
     
 }
 
-
-export const timeBetween = (askDate) => {
-    return timePassed(nowDateTime, receivedDateTime(new Date(askDate)));
+export const timeBetweenDates = (firstDateTime, secondDateTime) => {
+    return timePassed(firstDateTime, secondDateTime);
 }
-
-
-
-

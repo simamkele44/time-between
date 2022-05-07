@@ -7,7 +7,7 @@ Project: Time-Between Calculator
 */
 
 
-/* CURRENT DATE TIME */
+/* 22 April 2022 */
 
 const currentDateTime = {   
     now: new Date(),
@@ -91,7 +91,7 @@ const timePassed = (firstDateTime, secondDateTime) => {
     const in_secs = (same_year && same_month && same_day && same_hour && same_min);
     const in_mins = (same_year && same_month && same_day && same_hour);
     const in_hours = (same_year && same_month && same_day);
-    const in_week = (same_year && same_month && (Math.abs(first_day - second_day)>=7 && Math.abs(first_day - second_day)<=28));
+    const in_week = (same_year && same_month && (Math.abs(first_day - second_day)>=7 && Math.abs(first_day - second_day)<=29));
     const in_day = (same_year && same_month);
     const in_months = (same_year);
 
@@ -142,17 +142,17 @@ const timePassed = (firstDateTime, secondDateTime) => {
                 return (`1 week ago`)
             }else if(elapsed_days<21){
                 return (`2 weeks ago`)
-            }else if(elapsed_days<29){
+            }else if(elapsed_days<28){
                 return (`3 weeks ago`)
             }else{
                 return (`4 weeks ago`)
             }
         }else{
-            if(Math.abs(elapsed_days<14)){
+            if(Math.abs(elapsed_days)<14){
                 return (`Happening in 1 week`)
-            }else if(Math.abs(elapsed_days<21)){
+            }else if(Math.abs(elapsed_days)<21){
                 return (`Happening in 2 weeks`)
-            }else if(Math.abs(elapsed_days<28)){
+            }else if(Math.abs(elapsed_days)<28){
                 return (`Happening in 3 weeks`)
             }else{
                 return (`Happening in 4 weeks`)
